@@ -1,0 +1,19 @@
+{
+  "name": "MongoLoginApplication",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "amqp": "^0.2.6",
+    "bcrypt": "^1.0.2",
+    "bcrypt-nodejs": "0.0.3",
+    "ejs": "*",
+    "express": "3.2.6",
+    "mysql": "^2.13.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "winston": "^2.3.1"
+  }
+}
