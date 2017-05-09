@@ -14,20 +14,16 @@ var mq_client = require('../rpc/client');
 //require('./routes/passport')(passport);
 
 exports.checkLogin = function(req,res,next){
-	// These two variables come from the form on
-	// the views/login.hbs page
-	var username = req.param("username");
-	var password = req.param("password");
-	console.log(username+"\t"+password);
-	console.log('info', "Basic:: " + username+"\t"+password);
-	
-	req.session.username=req.param("username");
-	console.log("\nsession data "+req.session.username);
-	var msg_payload = {"username":username,"password":password};
+	var msg_payload = {"username":req.param("username"),"password":req.param("password")};
 	mq_client.make_request('login_queue',msg_payload, function(err,results){
-		console.log("hey we got the response");
-		console.log(results);
-		res.send(results.json_responses);
+		if(results.json_responses.statusCode==200)
+		{
+			req.session.username=results.json_responses.user.user_email;
+			res.send(results.json_responses);
+		}
+		else{
+			res.send(results.json_responses);
+		}
 	});
 };
 
@@ -38,6 +34,23 @@ exports.registeruser = function(req,res,next){
 	var hash = bcrypt.hashSync(req.param("password"), salt);
 	var msg_payload = {"first_name":req.param("first_name"),"last_name":req.param("last_name"),"email":req.param("email"),"password":hash};
 	mq_client.make_request('register_queue',msg_payload, function(err,results){
+		res.send(results.json_responses);
+	});
+};
+
+
+
+exports.fetchproducts_all=function(req,res,next){
+	var msg_payload={};
+	mq_client.make_request('fetchproducts_all_queue',msg_payload,function(err,results){
+		res.send(results.json_responses);
+	});
+};
+
+exports.fetchproducts=function(req,res,next){
+	var msg_payload={"category":req.param("category")};
+	mq_client.make_request('fetchproducts_queue',msg_payload,function(err,results){
+		console.log(results.json_responses);
 		res.send(results.json_responses);
 	});
 };

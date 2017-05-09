@@ -1,0 +1,16 @@
+<div class="row"  ng-init="init();">
+<div class="col-md-4" ng-repeat="x in products" ng-model="products" ng-change="onchange(products);" >
+	<div class="col-md1 simpleCart_shelfItem">
+		<a href="#">
+			<img class="img-responsive" src="http://www.gettyimages.com/gi-resources/images/Embed/new/embed2.jpg" alt="" />
+		</a>
+		<h3><a href="#">{{x.productname}}</a></h3>
+		<div class="price">
+			<h5 class="item_price">{{x.productcategory}}</h5>
+			<h5 class="item_price">{{x.productcost}}</h5>
+			<a href="#" class="item_add" ng-click="add_to_cart(x);">Add To Cart</a>
+			<div class="clearfix"> </div>
+		</div>			
+	</div>
+</div>
+</div>

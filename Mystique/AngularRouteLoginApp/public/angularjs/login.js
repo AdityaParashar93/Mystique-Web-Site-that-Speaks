@@ -1,11 +1,9 @@
 //loading the 'login' angularJS module
 
-var login = angular.module('login', ['ui.router','ngRoute','ngResource']);
+var login = angular.module('login', ['ui.router','ngRoute','ngResource','ngCookies']);
 
 //to store session data
-var order_total=0;
 var display_name='';
-var session_owner='';
 login.config(function($stateProvider, $urlRouterProvider, $locationProvider,$routeProvider) {
 		$locationProvider.html5Mode(true);
 		$stateProvider.state('login', {	
@@ -30,7 +28,7 @@ login.config(function($stateProvider, $urlRouterProvider, $locationProvider,$rou
 	                templateUrl : 'templates/header1.html',
 	            },
 	            'sidebar':{
-	            	templateUrl : 'templates/sidebar.html'
+	            	templateUrl : 'templates/navbar.html'
 	            },
 	            'content': {
 	                templateUrl : 'templates/index.html',
@@ -40,17 +38,35 @@ login.config(function($stateProvider, $urlRouterProvider, $locationProvider,$rou
 		$urlRouterProvider.otherwise('/');
 });
 //defining the login controller
-login.controller('login', function($scope,$http,$state) {
+login.controller('login', function($scope,$http,$state,$window, $cookies, $cookieStore) {
+	console.log($scope.current_user);
+	$scope.current_user=$cookieStore.get('user');
+	console.log($scope.current_user);
 	$scope.invalid_data = true;
 	$scope.valid_data = true;
-	$scope.invalid_product=true;
-	$scope.valid_product=true;
 	$scope.invalid_login = true;
-	$scope.validlogin = true;
-	$scope.invalid_bid = true;
-	$scope.valid_bid = true;
-	$scope.category_list=["electronics","clothes","sports","kitchen","mobile","laptop","garden","home","living","media"];
+	$scope.valid_login = true;	
 	
+	$scope.init=function(){
+		console.log("call is here");
+		$http({
+			method : "POST",
+			url : '/fetchproducts_all',
+			data : {
+			}
+		}).success(function(data) {
+			if (data.statusCode == 200) {
+				console.log(data.products);
+				$scope.products=data.products;
+			}
+			else{
+				
+			} 
+		}).error(function(error) {
+			
+		});
+		
+	}
 	
 	$scope.register = function() {
 		$scope.invalid_data_message="";
@@ -65,7 +81,6 @@ login.controller('login', function($scope,$http,$state) {
 			}
 		}).success(function(data) {
 			if (data.statusCode == 200) {
-				console.log(data);
 				$scope.valid_data = false;
 				$scope.invalid_data = true;
 			}
@@ -83,7 +98,7 @@ login.controller('login', function($scope,$http,$state) {
 	
 	
 	$scope.submit = function() {
-		/*$http({
+		$http({
 			method : "POST",
 			url : '/checklogin',
 			data : {
@@ -92,24 +107,53 @@ login.controller('login', function($scope,$http,$state) {
 			}
 		}).success(function(data) {
 			console.log(data);
-			//checking the response data for statusCode
-			if (data.statusCode == 401) {
-				$scope.invalid_login = false;
-				$scope.validlogin = true;
+			if (data.statusCode == 200) {
+				console.log(data.user.first_name);
+				$cookieStore.put('user',data.user);
+				$scope.valid_login = false;
+				$scope.invalid_login = true;
+				display_name=data.user.first_name;
+				$scope.session_owner=data.user.email;
+				$scope.display_name=display_name;
+				$scope.login_modal=true;
+				$window.location.assign('/index');
 			}
 			else{
-				$scope.validlogin = false;
-				$scope.invalid_login = true;
-				console.log(data.display_name+"\t"+data.session_owner);
-				display_name=data.display_name;
-				session_owner=data.session_owner;
-				$scope.session_owner=session_owner;
-				$scope.display_name=display_name;
-				$state.go('/index');
+				$scope.invalid_login = false;
+				$scope.validlogin = true;
 			} 
 		}).error(function(error) {
 			$scope.validlogin = true;
-			$scope.invalid_login = true;
-		});*/
+			$scope.invalid_login = false;
+		});
 	};
+	
+	$scope.fetchproducts=function(category){
+		console.log("test");
+		console.log(category);
+		$http({
+			method : "POST",
+			url : '/fetchproducts',
+			data : {
+				"category":category
+			}
+		}).success(function(data) {
+			if (data.statusCode == 200) {
+				if(data.products[0])
+				{
+					$scope.products=data.products[0].products;
+				}
+			}
+			else{
+				
+			} 
+		}).error(function(error) {
+			
+		});
+	};
+	
+	$scope.add_to_cart=function(x){
+		console.log(x);
+	}
+	
 });

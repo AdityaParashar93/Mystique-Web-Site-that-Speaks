@@ -57,6 +57,8 @@ app.get('/index',index.re);
 //POST Requests
 app.post('/checklogin', login.checkLogin);
 app.post('/registeruser', login.registeruser);
+app.post('/fetchproducts_all',login.fetchproducts_all);
+app.post('/fetchproducts',login.fetchproducts);
 
 
 
