@@ -1,16 +1,15 @@
 <div class="row"  ng-init="init();">
-<div class="col-md-4" ng-repeat="x in products" ng-model="products" ng-change="onchange(products);" >
-	<div class="col-md1 simpleCart_shelfItem">
-		<a href="#">
-			<img class="img-responsive" src="http://www.gettyimages.com/gi-resources/images/Embed/new/embed2.jpg" alt="" />
-		</a>
-		<h3><a href="#">{{x.productname}}</a></h3>
-		<div class="price">
-			<h5 class="item_price">{{x.productcategory}}</h5>
-			<h5 class="item_price">{{x.productcost}}</h5>
-			<a href="#" class="item_add" ng-click="add_to_cart(x);">Add To Cart</a>
-			<div class="clearfix"> </div>
-		</div>			
+<div class="row">
+<div class="col-md-4" ng-repeat="x in products" ng-model="products" ng-change="onchange(products);" style="margin-bottom:80px">	
+	<div class="row">
+		<img class="img-responsive" ng-src="https://{{x.URL}}" alt="" style="width:300px;height:240px;"/>
 	</div>
+	<div class="row">
+		<h3>{{x.productname}}</h3>
+		<h5>Product Category:{{x.productcategory}}</h5>
+		<h5>Product Cost:{{x.productcost}}</h5>
+	</div>
+	<div class="row" style="padding-right:10px;"><input type="submit" class="btn btn-success btn-block btn-lg"  value="Add to Cart"   ng-click="add_to_cart(x);" /></div>
+</div>			
 </div>
 </div>

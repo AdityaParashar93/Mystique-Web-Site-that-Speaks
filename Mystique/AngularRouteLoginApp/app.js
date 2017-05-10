@@ -53,13 +53,18 @@ if ('development' === app.get('env')) {
 //GET Requests
 app.get('/', routes.index);
 app.get('/index',index.re);
+app.get('/cart',index.re);
+app.get('/checkout',index.re1);
 
 //POST Requests
 app.post('/checklogin', login.checkLogin);
+app.post('/checklogin_fetch', login.checkLogin_fetch);
 app.post('/registeruser', login.registeruser);
 app.post('/fetchproducts_all',login.fetchproducts_all);
 app.post('/fetchproducts',login.fetchproducts);
-
+app.post('/add_to_cart',login.add_to_cart);
+app.post('/remove_from_cart',login.remove_from_cart);
+app.post('/payment',login.payment);
 
 
 //

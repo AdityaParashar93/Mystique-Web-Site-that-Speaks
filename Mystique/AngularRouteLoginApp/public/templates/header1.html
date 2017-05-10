@@ -1,4 +1,4 @@
-<div class="row" >
+<div class="row" ng-init="init_header1();">
 <!--Navigation bar-->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -8,14 +8,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html" style="color:red;">Mystique</a>
+        <a class="navbar-brand" href="/index" style="color:red;">Mystique</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#feature">Account</a></li>
           <li><a href="#organisations">Orders</a></li>
           <li><a href="#courses">Subscription Orders</a></li>
-          <li><a href="#" >About Us</a></li>
+          <li class="btn-trial"><a href="/cart" ng-model="current_user" ng-change="current_user">Shopping Cart : {{cart_length}}</a></li>
           <li class="btn-trial"><a href="#">{{current_user.first_name}}</a></li>
         </ul>
         </div>

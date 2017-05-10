@@ -27,6 +27,21 @@ exports.checkLogin = function(req,res,next){
 	});
 };
 
+exports.checkLogin_fetch = function(req,res,next){
+	var msg_payload = {"username":req.session.username};
+	mq_client.make_request('login_fetch_queue',msg_payload, function(err,results){
+		if(results.json_responses.statusCode==200)
+		{
+			req.session.username=results.json_responses.user.user_email;
+			console.log(results);
+			res.send(results.json_responses);
+		}
+		else{
+			res.send(results.json_responses);
+		}
+	});
+};
+
 
 
 exports.registeruser = function(req,res,next){
@@ -50,6 +65,34 @@ exports.fetchproducts_all=function(req,res,next){
 exports.fetchproducts=function(req,res,next){
 	var msg_payload={"category":req.param("category")};
 	mq_client.make_request('fetchproducts_queue',msg_payload,function(err,results){
+		console.log(results.json_responses);
+		res.send(results.json_responses);
+	});
+};
+
+
+exports.add_to_cart=function(req,res,next){
+	var msg_payload={"username":req.session.username,"product":req.param("product")};
+	console.log(req.session.username);
+	mq_client.make_request('add_to_cart_queue',msg_payload,function(err,results){
+		console.log(results.json_responses);
+		res.send(results.json_responses);
+	});
+};
+
+exports.remove_from_cart=function(req,res,next){
+	var msg_payload={"username":req.session.username,"product":req.param("product")};
+	console.log(req.session.username);
+	mq_client.make_request('remove_from_cart_queue',msg_payload,function(err,results){
+		console.log(results.json_responses);
+		res.send(results.json_responses);
+	});
+};
+
+exports.payment=function(req,res,next){
+	var msg_payload={"username":req.session.username,"order":req.param("order")};
+	console.log(req.session.username);
+	mq_client.make_request('payment_queue',msg_payload,function(err,results){
 		console.log(results.json_responses);
 		res.send(results.json_responses);
 	});

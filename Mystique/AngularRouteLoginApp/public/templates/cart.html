@@ -1,0 +1,53 @@
+ <h1>Shopping Cart</h1>
+
+<div class="shopping-cart" ng-init="prepare_cart()">
+
+  <div class="column-labels">
+    <label class="product-image">Image</label>
+    <label class="product-details">Product</label>
+    <label class="product-price">Price</label>
+    <label class="product-quantity">Quantity</label>
+    <label class="product-removal">Remove</label>
+    <label class="product-line-price">Total</label>
+  </div>
+	<div class="row" ng-model="removed_cart" ng-change="removed_cart">	
+  <div class="product" ng-repeat="x in current_user.cart" ng-init="prepare_cart_products(x);">
+    <div class="product-image">
+      <img class="img-responsive" ng-src="https://{{x.URL}}" alt="" size="width:100px;height:80px;">
+    </div>
+    <div class="product-details">
+      <div class="product-title">{{x.productname}}</div>
+      <p class="product-description">{{x.productdesc}}</p>
+    </div>
+    <div class="product-price">{{x.productcost}}</div>
+    <div class="product-quantity">
+      <input type="number" min="1" max="10" ng-change="update_cart(x);" ng-model="x.product_quantity"  >
+    </div>
+    <div class="product-removal">
+      <button class="remove-product" ng-click="remove_cart(x);">
+        Remove
+      </button>
+    </div>
+    <div class="product-line-price">{{x.product_total}}</div>
+  </div>
+  </div>
+
+
+  <div class="totals">
+    <div class="totals-item">
+      <label>Subtotal</label>
+      <div class="totals-value" id="cart-subtotal" ng-model="order_total" ng-change="order_total">{{order_total}}</div>
+    </div>
+    <div class="totals-item">
+      <label>Tax (5%)</label>
+      <div class="totals-value" id="cart-tax" ng-model="order_total_tax" ng-change="order_total_tax">{{order_total_tax}}</div>
+    </div>
+    <div class="totals-item totals-item-total">
+      <label>Grand Total</label>
+      <div class="totals-value" id="cart-total" ng-model="order_total_tax" ng-change="order_total_tax">{{order_total_tax}}</div>
+    </div>
+  </div>
+      
+      <a class="checkout" href="#" ng-click="checkout()">Checkout</a>
+
+</div>

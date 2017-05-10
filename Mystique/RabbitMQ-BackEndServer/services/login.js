@@ -11,7 +11,6 @@ exports.handle_register_request=function(msg,callback){
 	var json_responces;
 	mongo.connect(mongoURL,function(connection){
 		var coll=mongo.collection('Mystique');
-		
 		process.nextTick(function(){
 			coll.update({doctype:"users"},
 					{$push:{users:{first_name:msg.first_name,
@@ -53,9 +52,7 @@ exports.handle_register_request=function(msg,callback){
 exports.handle_request_checkLogin = function(msg, callback){
 	var res={};
 	var json_responses;
-	console.log("In handle request:"+ msg.username);
 	mongo.connect(mongoURL,function(connection){
-		console.log("Connected to mongo at:"+mongoURL);
 		var coll=mongo.collection('Mystique');
 		process.nextTick(function(){
 			coll.findOne({doctype:"users"},{users:{$elemMatch:{
@@ -89,11 +86,42 @@ exports.handle_request_checkLogin = function(msg, callback){
 		});
 	});
 };
+exports.handle_request_checkLogin_fetch = function(msg, callback){
+	var res={};
+	var json_responses;
+	mongo.connect(mongoURL,function(connection){
+		console.log(msg.username);
+		var coll=mongo.collection('Mystique');
+		process.nextTick(function(){
+			coll.findOne({doctype:"users"},{users:{$elemMatch:{
+				user_email:msg.username,
+				}}},function(err,user)
+			{
+				if(err) {
+					connection.close();
+					res.json_responses={"statusCode":401};
+					callback(null, res);
+	            }
+
+				else if(!user) {
+					connection.close();
+					res.json_responses={"statusCode":405};
+					callback(null, res);
+	            }
+				else {
+						connection.close();
+						console.log(user);
+						res.json_responses={"statusCode":200,user:user.users[0]};
+						callback(null, res);
+				}
+		});
+		});
+	});
+};
 exports.handle_fetchproducts_all=function(msg,callback){
 	var res={};
 	var json_responses;
 	mongo.connect(mongoURL,function(connection){
-		console.log("Connected to mongo at:"+mongoURL);
 		var coll=mongo.collection('Mystique');	
 		process.nextTick(function(){
 			coll.findOne({doctype:"products"},function(err,user)
@@ -112,7 +140,6 @@ exports.handle_fetchproducts_all=function(msg,callback){
 	            }
 				else {
 					connection.close();
-					console.log(user);
 					res.json_responses={"statusCode":200,"products":user.products};
 					callback(null, res);
 				}
@@ -125,7 +152,6 @@ exports.handle_fetchproducts=function(msg,callback){
 	var res={};
 	var json_responses;
 	mongo.connect(mongoURL,function(connection){
-		console.log("Connected to mongo at:"+mongoURL);
 		var coll=mongo.collection('Mystique');
 		process.nextTick(function(){
 			coll.aggregate([
@@ -134,6 +160,37 @@ exports.handle_fetchproducts=function(msg,callback){
 				{$match:{"products.productcategory":msg.category}},
 				{$group:{_id:null,"products":{$push:"$products"}}}
 				],function(err,user){
+				if(err) {
+					connection.close();
+					res.json_responses={"statusCode":405};
+					callback(null, res);
+	            }
+
+				else if(!user) {
+					connection.close();
+					res.json_responses={"statusCode":405};
+					callback(null, res);
+	            }
+				else {
+					connection.close();
+					res.json_responses={"statusCode":200,"products":user};
+					callback(null, res);
+				}
+		});
+		});
+	});
+}
+
+
+exports.handle_add_to_cart=function(msg,callback){
+	var res={};
+	var json_responses;
+	mongo.connect(mongoURL,function(connection){
+		var coll=mongo.collection('Mystique');
+		process.nextTick(function(){
+			coll.update({ doctype: "users", "users.user_email":msg.username},
+			{ "$push": { 'users.$.cart': msg.product } }
+			,function(err,user){
 				if(err) {
 					connection.close();
 					console.log(err);
@@ -148,10 +205,135 @@ exports.handle_fetchproducts=function(msg,callback){
 					callback(null, res);
 	            }
 				else {
+					console.log(user);
+					coll.findOne({doctype:"users"},{users:{$elemMatch:{
+						user_email:msg.username,
+						}}},function(err,user)
+					{
+						if(err) {
+							connection.close();
+							res.json_responses={"statusCode":401};
+							callback(null, res);
+			            }
+
+						else if(!user) {
+							connection.close();
+							res.json_responses={"statusCode":405};
+							callback(null, res);
+			            }
+						else {
+								connection.close();
+								res.json_responses={"statusCode":200,user:user.users[0]};
+								callback(null, res);
+						}
+				});
+				}
+		});
+		});
+	});
+}
+
+
+exports.handle_remove_from_cart=function(msg,callback){
+	var res={};
+	var json_responses;
+	mongo.connect(mongoURL,function(connection){
+		var coll=mongo.collection('Mystique');
+		process.nextTick(function(){
+			coll.update({ doctype: "users", "users.user_email":msg.username},
+			{ "$pull": { 'users.$.cart': {"productid":msg.product.productid} } }
+			,function(err,user){
+				if(err) {
 					connection.close();
-					console.log(user.products);
-					res.json_responses={"statusCode":200,"products":user};
+					console.log(err);
+					res.json_responses={"statusCode":405};
 					callback(null, res);
+	            }
+
+				else if(!user) {
+					connection.close();
+					console.log("did not find");
+					res.json_responses={"statusCode":405};
+					callback(null, res);
+	            }
+				else {
+					console.log(user);
+					coll.findOne({doctype:"users"},{users:{$elemMatch:{
+						user_email:msg.username,
+						}}},function(err,user)
+					{
+						if(err) {
+							connection.close();
+							res.json_responses={"statusCode":401};
+							callback(null, res);
+			            }
+
+						else if(!user) {
+							connection.close();
+							res.json_responses={"statusCode":405};
+							callback(null, res);
+			            }
+						else {
+								connection.close();
+								res.json_responses={"statusCode":200,user:user.users[0]};
+								callback(null, res);
+						}
+				});
+				}
+		});
+		});
+	});
+}
+
+
+exports.handle_payment=function(msg,callback){
+	var res={};
+	var json_responses;
+	mongo.connect(mongoURL,function(connection){
+		var coll=mongo.collection('Mystique');
+		process.nextTick(function(){
+			coll.update({ doctype: "users", "users.user_email":msg.username},
+			{ "$push": { 'users.$.orders': msg.order } }
+			,function(err,user){
+				if(err) {
+					connection.close();
+					console.log(err);
+					res.json_responses={"statusCode":405};
+					callback(null, res);
+	            }
+
+				else if(!user) {
+					connection.close();
+					console.log("did not find");
+					res.json_responses={"statusCode":405};
+					callback(null, res);
+	            }
+				else {
+					console.log(user);
+					coll.update({ doctype: "users", "users.user_email":msg.username},
+							{ "$set": { 'users.$.cart': [] } });
+					coll.findOne({doctype:"users"},{users:{$elemMatch:{
+						user_email:msg.username,
+						}}},function(err,user)
+					{
+						if(err) {
+							connection.close();
+							res.json_responses={"statusCode":401};
+							callback(null, res);
+			            }
+
+						else if(!user) {
+							connection.close();
+							res.json_responses={"statusCode":405};
+							callback(null, res);
+			            }
+						else {
+								connection.close();
+								res.json_responses={"statusCode":200,user:user.users[0]};
+								console.log(user);
+								callback(null, res);
+						}
+				});
 				}
 		});
 		});
