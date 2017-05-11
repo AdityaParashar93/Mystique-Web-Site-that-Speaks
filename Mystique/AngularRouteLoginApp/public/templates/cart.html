@@ -1,4 +1,4 @@
- <h1>Shopping Cart</h1>
+<h1 ng-init="init_header1();">Shopping Cart</h1>
 
 <div class="shopping-cart" ng-init="prepare_cart()">
 
@@ -10,8 +10,8 @@
     <label class="product-removal">Remove</label>
     <label class="product-line-price">Total</label>
   </div>
-	<div class="row" ng-model="removed_cart" ng-change="removed_cart">	
-  <div class="product" ng-repeat="x in current_user.cart" ng-init="prepare_cart_products(x);">
+	<div class="row" ng-model="cart" ng-change="cart" ng-init="prepare_cart_products(current_user.cart);">	
+  <div class="product" ng-repeat="x in cart" >
     <div class="product-image">
       <img class="img-responsive" ng-src="https://{{x.URL}}" alt="" size="width:100px;height:80px;">
     </div>
@@ -21,7 +21,7 @@
     </div>
     <div class="product-price">{{x.productcost}}</div>
     <div class="product-quantity">
-      <input type="number" min="1" max="10" ng-change="update_cart(x);" ng-model="x.product_quantity"  >
+      <input type="number" min="1" max="10" ng-model="x.product_quantity" ng-change="update_cart(x);">
     </div>
     <div class="product-removal">
       <button class="remove-product" ng-click="remove_cart(x);">
@@ -40,7 +40,7 @@
     </div>
     <div class="totals-item">
       <label>Tax (5%)</label>
-      <div class="totals-value" id="cart-tax" ng-model="order_total_tax" ng-change="order_total_tax">{{order_total_tax}}</div>
+      <div class="totals-value" id="cart-tax" ng-model="order_total_tax" ng-change="order_total_tax">{{(order_total_tax-order_total)}}</div>
     </div>
     <div class="totals-item totals-item-total">
       <label>Grand Total</label>

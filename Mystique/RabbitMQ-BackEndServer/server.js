@@ -114,12 +114,27 @@ cnn.on('ready', function(){
 			});
 		});
 	});
-	cnn.queue('payment_queue', function(q){
+	cnn.queue('payment_queue_1', function(q){
 		q.subscribe(function(message, headers, deliveryInfo, m){
 			util.log(util.format( deliveryInfo.routingKey, message));
 			util.log("Message: "+JSON.stringify(message));
 			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
-			login.handle_payment(message, function(err,res){
+			login.handle_payment_1(message, function(err,res){
+
+				cnn.publish(m.replyTo, res, {
+					contentType:'application/json',
+					contentEncoding:'utf-8',
+					correlationId:m.correlationId
+				});
+			});
+		});
+	});
+	cnn.queue('payment_queue_2', function(q){
+		q.subscribe(function(message, headers, deliveryInfo, m){
+			util.log(util.format( deliveryInfo.routingKey, message));
+			util.log("Message: "+JSON.stringify(message));
+			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
+			login.handle_payment_2(message, function(err,res){
 
 				cnn.publish(m.replyTo, res, {
 					contentType:'application/json',

@@ -1,7 +1,7 @@
 <div class="row"  ng-init="init();">
 <div class="row">
-<div class="col-md-4" ng-repeat="x in products" ng-model="products" ng-change="onchange(products);" style="margin-bottom:80px">	
-	<div class="row">
+<div class="col-md-4" ng-repeat="x in products" ng-model="products" ng-change="onchange(products);" style="margin-bottom:80px" >	
+	<div class="row" ng-mouseleave="pauseit()"    ng-mouseover="describe_products(x);">
 		<img class="img-responsive" ng-src="https://{{x.URL}}" alt="" style="width:300px;height:240px;"/>
 	</div>
 	<div class="row">
@@ -9,7 +9,7 @@
 		<h5>Product Category:{{x.productcategory}}</h5>
 		<h5>Product Cost:{{x.productcost}}</h5>
 	</div>
-	<div class="row" style="padding-right:10px;"><input type="submit" class="btn btn-success btn-block btn-lg"  value="Add to Cart"   ng-click="add_to_cart(x);" /></div>
+	<div class="row" style="padding-right:10px;"><input type="submit" class="btn btn-success btn-block btn-lg"  value="Add to Cart"   ng-click="add_to_cart(x);" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Click here to add the product to the cart');" /></div>
 </div>			
 </div>
 </div>

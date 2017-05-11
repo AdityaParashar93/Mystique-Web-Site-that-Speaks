@@ -1,4 +1,4 @@
-<div class="row" ng-controller="login">
+<div class="row" ng-controller="login" ng-init="init_header1();">
 <div class="col-md-12">
 <!-- CREDIT CARD FORM STARTS HERE -->
 <div class="row">
@@ -13,8 +13,8 @@
 </div>
 </div>                    
 </div>
-<div class="panel-body">
 <form role="form">
+<div class="panel-body">
 <div class="row">
 <div class="col-md-12">
 <div class="form-group">
@@ -42,6 +42,17 @@
 </div>
 <div class="row">
 <div class="col-md-12">
+<div class="checkbox">
+    <label for="checkboxes-0">
+      <input type="checkbox" ng-model="subscribe_order">
+      Subscription Order
+    </label>
+	</div>
+  </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
 <button class="btn btn-success btn-lg btn-block" type="submit" ng-click="payment()">Confirm Payment</button>
 </div>
 </div>
@@ -58,10 +69,10 @@
 </div>
 </div>            
 <!-- CREDIT CARD FORM ENDS HERE -->
-</div>
 <div class="col-md-2"></div>
-<div class="col-md-4">
 
+<div class="col-md-4">
+<div class="row">
 <div class="totals">
     <div class="totals-item">
       <label>Order Subtotal</label>
@@ -76,7 +87,16 @@
       <div class="totals-value" id="cart-total" ng-model="order_total_tax" ng-change="order_total_tax">{{current_order.order_total_tax}}</div>
     </div>
   </div>
-
+</div>
+<div class="row">
+<br><br>
+	<div class="form-group">
+  <label class="col-md-12 control-label" for="textarea">Delivery Address</label>
+  <div class="col-md-12">                     
+    <textarea class="form-control" id="textarea" name="textarea" ng-model="address"></textarea>
+  </div>
+</div>
+</div>
 </div>
 <div class="col-md-1"></div>
 </div>

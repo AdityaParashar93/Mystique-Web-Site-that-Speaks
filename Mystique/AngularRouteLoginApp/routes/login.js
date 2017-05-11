@@ -11,9 +11,12 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var passport = require('passport');
 var mq_client = require('../rpc/client');
+var redis = require('redis');
+var redisclient = redis.createClient(6379, '127.0.0.1');
 //require('./routes/passport')(passport);
 
 exports.checkLogin = function(req,res,next){
+	console.log(req.param("username"));
 	var msg_payload = {"username":req.param("username"),"password":req.param("password")};
 	mq_client.make_request('login_queue',msg_payload, function(err,results){
 		if(results.json_responses.statusCode==200)
@@ -57,9 +60,9 @@ exports.registeruser = function(req,res,next){
 
 exports.fetchproducts_all=function(req,res,next){
 	var msg_payload={};
-	mq_client.make_request('fetchproducts_all_queue',msg_payload,function(err,results){
-		res.send(results.json_responses);
-	});
+	mq_client.make_request('fetchproducts_all_queue',msg_payload,function(err,results) {
+           res.send(results.json_responses); 
+            });
 };
 
 exports.fetchproducts=function(req,res,next){
@@ -90,10 +93,18 @@ exports.remove_from_cart=function(req,res,next){
 };
 
 exports.payment=function(req,res,next){
-	var msg_payload={"username":req.session.username,"order":req.param("order")};
-	console.log(req.session.username);
-	mq_client.make_request('payment_queue',msg_payload,function(err,results){
-		console.log(results.json_responses);
-		res.send(results.json_responses);
-	});
+	
+	var msg_payload={"username":req.session.username,"order":req.param("order"),"category":req.param("category")};
+	if(req.param("category")=="orders"){
+		mq_client.make_request('payment_queue_1',msg_payload,function(err,results){
+			console.log(results.json_responses);
+			res.send(results.json_responses);
+		});
+	}
+	else{
+		mq_client.make_request('payment_queue_2',msg_payload,function(err,results){
+			console.log(results.json_responses);
+			res.send(results.json_responses);
+		});
+	}
 };

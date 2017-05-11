@@ -17,6 +17,14 @@ var login = require("./routes/login");
 var index=require("./routes/index");
 var passport = require('passport');
 require('./routes/passport')(passport);
+var redis = require('redis');
+var redisStore = require('connect-redis')(expressSession);
+var client = redis.createClient('6379','127.0.0.1'); //creates a new client
+console.log('redis on:127.0.0.1:6379 ')
+
+
+//do something when app is closing
+
 
 //var session = require('client-sessions');
 
@@ -54,7 +62,8 @@ if ('development' === app.get('env')) {
 app.get('/', routes.index);
 app.get('/index',index.re);
 app.get('/cart',index.re);
-app.get('/checkout',index.re1);
+app.get('/checkout',index.re);
+app.get('/account',index.re);
 
 //POST Requests
 app.post('/checklogin', login.checkLogin);
@@ -75,4 +84,20 @@ app.post('/payment',login.payment);
 	http.createServer(app).listen(app.get('port'), function(){
 		console.log('Express server listening on port ' + app.get('port'));
 	});  
- });	
+ });
+    
+    
+    process.on('exit', exitHandler.bind(null,{cleanup:true}));
+
+
+    function exitHandler(options, err) {
+        if (options.cleanup){
+            console.log('Clean Redis');
+
+            client.del('hostList');
+            client.del('billList');
+            client.del('userList');
+
+        }
+
+    }

@@ -1,0 +1,242 @@
+<style type="text/css">
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+body{margin-top:20px;}
+.fa-fw {width: 2em;}
+.jumbotron {
+background: #358CCE;
+color: #FFF;
+border-radius: 0px;
+}
+.jumbotron-sm { padding-top: 24px;
+padding-bottom: 24px; }
+.jumbotron small {
+color: #FFF;
+}
+.h1 small {
+font-size: 24px;
+}
+.table-responsive{margin-top:25px;}
+</style>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked admin-menu">
+                <li class="active"><a href="#" data-target-id="home"><i class="fa fa-home fa-fw"></i>Home</a></li>
+                <li><a href="http://www.jquery2dotnet.com" data-target-id="Profile"><i class="fa fa-list-alt fa-fw"></i>Personal Information</a></li>
+                <li><a href="http://www.jquery2dotnet.com" data-target-id="Orders"><i class="fa fa-file-o fa-fw"></i>Orders</a></li>
+                <li><a href="http://www.jquery2dotnet.com" data-target-id="Subscriptions"><i class="fa fa-bar-chart-o fa-fw"></i>Subscriptions</a></li>
+                <li><a href="http://www.jquery2dotnet.com" data-target-id="Help"><i class="fa fa-table fa-fw"></i>Help</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9 well admin-content" id="home">
+            <p>
+                Hello! {{current_user.first_name}}  {{current_user.last_name}}.<br>
+                Welcome to the account management page of the Mystique.
+            </p>
+        </div>
+        <div class="col-md-9 well admin-content" id="Profile">
+            <form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Personal details</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">First Name</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" ng-model="current_user.first_name">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Last Name</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" ng-model="current_user.last_name">
+    
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textarea">Delivery Address</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="textarea" name="textarea" ng-model="current_user.address"></textarea>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Home telephone</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" ng-model="current_user.contact_number">
+    
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary" ng-click="update_info()">Save</button>
+  </div>
+</div>
+
+</fieldset>
+        </div>
+        <div class="col-md-9 well admin-content" id="Orders" >
+            <div class="row" ng-repeat="x in current_user.orders">
+        <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Product Category</th>
+            <th>Product Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="y in x.products">
+            <td>{{y.productid}}</td>
+            <td>{{y.productname}}</td>
+            <td>{{y.productcategory}}</td>
+            <td>{{y.product_quantity}}</td>
+            <td>{{y.productcost}}</td>
+            <td>{{y.product_total}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row"><div class="col-md-2"></div><p>Order Total:{{x.order_total_tax}}</p></div>
+    <div class="row"><div class="col-md-2"></div><p>Delivery Address:{{x.delivery_address}}</p></div>
+    </div>
+    </div>
+        </div>
+        
+        
+
+
+
+<div class="col-md-6 well admin-content" id="Subscriptions" >
+            <div class="row" ng-repeat="x in current_user.subscription_orders">
+        <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Product Category</th>
+            <th>Product Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="y in x.products">
+            <td>{{y.productid}}</td>
+            <td>{{y.productname}}</td>
+            <td>{{y.productcategory}}</td>
+            <td>{{y.productcost}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br><br>
+     <div class="row"><div class="col-md-2"></div><p>Order Total:{{x.order_total_tax}}</p></div>
+    <div class="row"><div class="col-md-2"></div><p>Delivery Address:{{x.delivery_address}}</p></div>
+    </div>
+    </div>
+
+
+
+
+
+
+<div class="col-md-6 well admin-content" id="Help">
+            <div class="jumbotron jumbotron-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="h1">
+                    Contact us<br> <small>Feel free to contact us</small></h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-10 well well-sm">
+                <form>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="name">
+                                Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter name" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
+                                </span>
+                                <input type="email" class="form-control" id="email" placeholder="Enter email" required="required" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">
+                                Subject</label>
+                            <select id="subject" name="subject" class="form-control" required="required">
+                                <option value="na" selected="">Choose One:</option>
+                                <option value="service">General Customer Service</option>
+                                <option value="suggestions">Suggestions</option>
+                                <option value="product">Product Support</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">
+                                Message</label>
+                            <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
+                                placeholder="Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                            Send Message</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+    var navItems = $('.admin-menu li > a');
+    var navListItems = $('.admin-menu li');
+    var allWells = $('.admin-content');
+    var allWellsExceptFirst = $('.admin-content:not(:first)');
+    
+    allWellsExceptFirst.hide();
+    navItems.click(function(e)
+    {
+        e.preventDefault();
+        navListItems.removeClass('active');
+        $(this).closest('li').addClass('active');
+        
+        allWells.hide();
+        var target = $(this).attr('data-target-id');
+        $('#' + target).show();
+    });
+});
+</script>
