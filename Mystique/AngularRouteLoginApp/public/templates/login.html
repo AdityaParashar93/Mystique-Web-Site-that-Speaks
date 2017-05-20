@@ -5,12 +5,12 @@
           <div class="row">
             <div class="banner-text text-center">
               <div class="text-border">
-                <h2 class="text-dec">Mystique</h2>
+                <h2 class="text-dec" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Welcome to mystique...');">Mystique</h2>
               </div>
               <div class="intro-para text-center quote">
-                <p class="big-text">The Website that speaks.</p>
-                <p class="small-text">Developing smart and innovative community</p>
-                <a href="#." class="btn">GET A QUOTE</a>
+                <p class="big-text" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('The Website that speaks...');">The Website that speaks.</p>
+                <p class="small-text" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Developing smart and innovative community...');" >Developing smart and innovative community</p>
+                <a href="#." class="btn" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Click here to view the products...');">View Products</a>
               </div>
               <a href="#feature" class="mouse-hover"><div class="mouse"></div></a>
             </div>
@@ -24,16 +24,16 @@
       <div class="container">
         <div class="row">
           <div class="header-section text-center">
-            <h2>Features</h2>
-            <p>The connectivity brought into existence through this project includes a strong communication and information maintaining between various communities involved with the activities of education bodies (schools, colleges), like that between community of students, teachers, parents and the subject of study the pupil is involved in and various other aspects.</p>
+            <h2 ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Features...');">Features</h2>
+           
             <hr class="bottom-line">
           </div>
           <div class="feature-info">
             <div class="fea">
               <div class="col-md-4">
                 <div class="heading pull-right">
-                  <h4>Student</h4>
-                  <p>Student can access portal.</p>
+                  <h4 ng-mouseleave="pauseit()"    ng-mouseover="describe_element('VoiceOver...');">VoiceOver</h4>
+                  <p ng-mouseleave="pauseit()"    ng-mouseover="describe_element('You dont need to see to use our website...');">You dont need to see to use our website.</p>
                 </div>
                 <div class="fea-img pull-left">
                   <i class="fa fa-css3"></i>
@@ -43,8 +43,8 @@
             <div class="fea">
               <div class="col-md-4">
                 <div class="heading pull-right">
-                  <h4>Parent</h4>
-                  <p>Parent can access portal.</p>
+                  <h4 ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Display...');" >Display</h4>
+                  <p ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Easy to access and use...');">Easy to access and use.</p>
                 </div>
                 <div class="fea-img pull-left">
                   <!--<i class="fa fa-drupal"></i>-->
@@ -55,8 +55,8 @@
             <div class="fea">
               <div class="col-md-4">
                 <div class="heading pull-right">
-                  <h4>Teacher</h4>
-                  <p>Student can access portal.</p>
+                  <h4 ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Crossbrowser and any device compatibility...');" >Crossbrowser and any device compatibility</h4>
+                  <p ng-mouseleave="pauseit()"    ng-mouseover="describe_element('View our website on any browser and any device....');">View our website on any browser and any device.</p>
                 </div>
                 <div class="fea-img pull-left">
                   <i class="fa fa-css3"></i>
@@ -99,10 +99,10 @@
           <div class="col-md-6">
             <div class="detail-info">
               <hgroup>
-                <h3 class="det-txt">Is inclusive quality education affordable?</h3>
+                <h3 class="det-txt">How much this website will help?</h3>
                 <h4 class="sm-txt">(Revised and Updated for 2016)</h4>
               </hgroup>
-              <p class="det-p">Donec et lectus bibendum dolor dictum auctor in ac erat. Vestibulum egestas sollicitudin metus non urna in eros tincidunt convallis id id nisi in interdum.</p>
+              
             </div>
           </div>
         </div>
@@ -133,27 +133,11 @@
         <div class="row">
           <div class="header-section text-center">
             <h2>Meet Our Development Team</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem nesciunt vitae,<br> maiores, magni dolorum aliquam.</p>
+
             <hr class="bottom-line">
           </div>
 
-          <div class="col-lg-3 col-md-3 col-sm-3">
-            <div class="pm-staff-profile-container" >
-              <div class="pm-staff-profile-image-wrapper text-center">
-                <div class="pm-staff-profile-image">
-                  <img src="img/aayushi.jpg" alt="" class="img-thumbnail img-circle" />
-                </div>   
-              </div>                                
-              <div class="pm-staff-profile-details text-center">  
-                <p class="pm-staff-profile-name">Aayushi Mittal</p>
-                <p class="pm-staff-profile-title">Front End Developer</p>
-                
-                <p class="pm-staff-profile-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et placerat dui. In posuere metus et elit placerat tristique. Maecenas eu est in sem ullamcorper tincidunt. </p>
-              </div>     
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-3 col-sm-3">
+		  <div class="col-md-3">
             <div class="pm-staff-profile-container" >
               <div class="pm-staff-profile-image-wrapper text-center">
                 <div class="pm-staff-profile-image">
@@ -164,39 +148,72 @@
                 <p class="pm-staff-profile-name">Aditya Parashar</p>
                 <p class="pm-staff-profile-title">Lead MEAN Stack Developer</p>
 
-                <p class="pm-staff-profile-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et placerat dui. In posuere metus et elit placerat tristique. Maecenas eu est in sem ullamcorper tincidunt. </p>
+
               </div>
             </div>
           </div>
-
-
-          <div class="col-lg-3 col-md-3 col-sm-3">
+		  
+          <div class="col-md-3">
             <div class="pm-staff-profile-container" >
               <div class="pm-staff-profile-image-wrapper text-center">
                 <div class="pm-staff-profile-image">
-                  <img src="img/rucha.jpg" alt="" class="img-thumbnail img-circle" />
+                  <img src="https://scontent-sjc2-1.xx.fbcdn.net/v/t1.0-9/12729089_1024425254290497_3458260228251395910_n.jpg?oh=18b64203f02d0ab4a040153176521cb2&oe=59795582" alt="" class="img-thumbnail img-circle" />
                 </div>   
               </div>                                
               <div class="pm-staff-profile-details text-center">  
-                <p class="pm-staff-profile-name">Rucha Marathe</p>
-                <p class="pm-staff-profile-title">Software Engineer</p>
+                <p class="pm-staff-profile-name">Dhivya Rajagopal</p>
+                <p class="pm-staff-profile-title">Back End Developer</p>
                 
-                <p class="pm-staff-profile-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et placerat dui. In posuere metus et elit placerat tristique. Maecenas eu est in sem ullamcorper tincidunt. </p>
+
               </div>     
             </div>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-3">
+
+          
+
+
+          <div class="col-md-3">
             <div class="pm-staff-profile-container" >
               <div class="pm-staff-profile-image-wrapper text-center">
                 <div class="pm-staff-profile-image">
-                    <img src="img/ali.jpg" alt="" class="img-thumbnail img-circle" />
+                  <img src="https://scontent-sjc2-1.xx.fbcdn.net/v/t1.0-1/13240633_1028182510608656_2970591570153574740_n.jpg?oh=403e09ba642fffea0f6c665315a40ae5&oe=5983AFB2" alt="" class="img-thumbnail img-circle" />
                 </div>   
               </div>                                
               <div class="pm-staff-profile-details text-center">  
-                <p class="pm-staff-profile-name">Sohrab Ali</p>
-                <p class="pm-staff-profile-title">Backend Developer</p>
+                <p class="pm-staff-profile-name">Preethi Senthil</p>
+                <p class="pm-staff-profile-title">Backend developer</p>
                 
-                <p class="pm-staff-profile-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et placerat dui. In posuere metus et elit placerat tristique. Maecenas eu est in sem ullamcorper tincidunt. </p>
+
+              </div>     
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="pm-staff-profile-container" >
+              <div class="pm-staff-profile-image-wrapper text-center">
+                <div class="pm-staff-profile-image">
+                    <img src="https://scontent-sjc2-1.xx.fbcdn.net/v/t31.0-8/s960x960/17855282_1465535483465609_5533880275555894543_o.jpg?oh=3af4b900aa0b43a86d569acca9a69c44&oe=59B64558" alt="" class="img-thumbnail img-circle" />
+                </div>   
+              </div>                                
+              <div class="pm-staff-profile-details text-center">  
+                <p class="pm-staff-profile-name">Aishwarya Rao</p>
+                <p class="pm-staff-profile-title">Frontend developer </p>
+                
+               
+              </div>     
+            </div>
+          </div>
+		   <div class="col-md-3">
+            <div class="pm-staff-profile-container" >
+              <div class="pm-staff-profile-image-wrapper text-center">
+                <div class="pm-staff-profile-image">
+                    <img src="https://scontent-sjc2-1.xx.fbcdn.net/v/t31.0-8/12657966_957874630975932_895797877021436251_o.jpg?oh=f8cd6cc463cfa41fcbe6159944e8a673&oe=59778173" alt="" class="img-thumbnail img-circle" />
+                </div>   
+              </div>                                
+              <div class="pm-staff-profile-details text-center">  
+                <p class="pm-staff-profile-name">Kalyani Kulkarni</p>
+                <p class="pm-staff-profile-title">Frontend Developer</p>
+                
+                
               </div>     
             </div>
           </div>
@@ -210,7 +227,7 @@
         <div class="row">
           <div class="header-section text-center">
             <h2>Courses</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem nesciunt vitae,<br> maiores, magni dolorum aliquam.</p>
+            
             <hr class="bottom-line">
           </div>
         </div>
@@ -320,7 +337,7 @@
                 Licensing information: https://bootstrapmade.com/license/
                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Mentor
             -->
-            Designed by Sohrab Ali, Aayushi Mittal, Rucha Marathe, Aditya Parashar</a>
+            Designed by Aditya Parashar,Dhivya Rajagopal,Preethi SenthilKumar,Kalyani Kulkarni,Aishwarya Rao</a>
         </div>
       </div>
     </footer>

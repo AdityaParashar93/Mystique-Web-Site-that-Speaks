@@ -23,7 +23,7 @@
     </nav>
     <!--/ Navigation bar-->
 </div>
-
+    
     <div id="login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-dismiss="modal" ng-controller="login">
 <div class="modal-dialog">
 <div class="modal-content">
@@ -35,19 +35,19 @@
           </div>
           <div class="modal-body">
 			<form >
-
+			
 			<div class="row" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('This the email field.Move your mouse little down and follow instructions.');"></div>
 			<div class="form-group" >
 				<label for="email">Email:</label>
 					<input type="email" class="form-control" ng-model="username" placeholder="Enter email" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to enter username');">
 			</div>
-
+			
 			<div class="row" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('This the password field.Move your mouse little down and follow instructions.');"></div>
 			<div class="form-group">
 				<label for="pwd">Password:</label>
 					<input type="password" class="form-control" ng-model="password" placeholder="Enter password" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Click here to enter password');">
 			</div>
-
+			
 			<div class="checkbox" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Click here to remember your login credentials');">
 				<label><input type="checkbox"> Remember me</label>
 			</div>
@@ -57,31 +57,25 @@
 			<div class="alert alert-success" ng-hide="valid_login">
 				<strong>Hey you are logged in now!</strong>
 			</div>
-
-
+			
 			<input type="submit" class="btn btn-success btn-block btn-lg"  value="Login"   ng-click="submit();" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to login to the website');"/>
 			<input type="submit" class="btn btn-success btn-block btn-lg" value="Register" data-target="#register" data-toggle="modal" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to register for this website');"/>
-
-
-			<input type="submit" class="btn btn-success btn-block btn-lg"  value="Login"   ng-click="submit();" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to login to the website');"/>
-			<input type="submit" class="btn btn-success btn-block btn-lg" value="Register" data-target="#register" data-toggle="modal" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to register for this website');"/>
-
-
+			
 			</form>
           </div>
         </div>
 </div>
 </div>
 </div>
+    
+    
+    
+    
+    
+    
+    
 
-
-
-
-
-
-
-
-	    <!--Modal box-->
+	   <!--Modal box-->
     <div id="register" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="login">
       <div class="modal-dialog">
 
@@ -89,7 +83,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            	<h2>Please Sign Up <small>It's free and always will be.</small></h2>
+            	<h2 ng-model="first_name" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Please scroll down to register its free and always will be');">Please Sign Up <small>  It's free and always will be.</small></h2>
           </div>
           <div class="modal-body padtrbl">
 
@@ -100,36 +94,36 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-                        <input type="text" name="first_name" ng-model="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1" required>
+                        <input type="text" name="first_name" ng-model="first_name" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to enter your first name');" class="form-control input-lg" placeholder="First Name" tabindex="1" required>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="text" name="last_name" ng-model="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2" required>
+						<input type="text" name="last_name" ng-model="last_name" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to enter your lastname');"class="form-control input-lg" placeholder="Last Name" tabindex="2" required>
 					</div>
 				</div>
 			</div>
 
 
 			<div class="form-group">
-				<input type="email" name="email" ng-model="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" required>
+				<input type="email" name="email" ng-model="email" class="form-control input-lg" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to enter the email address');" placeholder="Email Address" tabindex="4" required>
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="password" name="password" ng-model="password" class="form-control input-lg" placeholder="Password" tabindex="5" required>
+						<input type="password" name="password" ng-model="password" class="form-control input-lg" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to enter your password');" placeholder="Password" tabindex="5" required>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="password" name="password_confirmation" ng-model="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6" required>
+						<input type="password" name="password_confirmation" ng-model="password_confirmation" class="form-control input-lg" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to reenter your password');" placeholder="Confirm Password" tabindex="6" required>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-4 col-sm-3 col-md-3">
 					<span class="checkbox">
-						<label><input type="checkbox"> I Agree</label>
+						<label><input type="checkbox" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Check this box to agree to the conditions;"> I Agree</label>
 					</span>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-9">
@@ -143,8 +137,8 @@
 			</div>
 			<hr class="colorgraph">
 			<div class="row">
-				<div class="col-xs-12 col-md-6"><input type="submit" class="btn btn-success btn-block btn-lg" ng-click="register();" tabindex="7" value="Register" /></div>
-				<div class="col-xs-12 col-md-6"><input type="submit" class="btn btn-success btn-block btn-lg" data-target="#login" data-toggle="modal" value="Login"/></div>
+				<div class="col-xs-12 col-md-6"><input type="submit" class="btn btn-success btn-block btn-lg" ng-click="register();" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to register for this website');"tabindex="7" value="Register" /></div>
+				<div class="col-xs-12 col-md-6"><input type="submit" class="btn btn-success btn-block btn-lg" data-target="#login" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to login');" data-toggle="modal" value="Login"/></div>
 			</div>
 		</form>
 
@@ -157,3 +151,12 @@
       </div>
     </div>
     <!--/ Modal box-->
+
+
+
+
+
+
+
+
+

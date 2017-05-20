@@ -8,14 +8,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/index" style="color:red;">Mystique</a>
+        <a class="navbar-brand" href="/index" style="color:red;" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Welcome to mystique.Click here to view the products.Move the mouse down to find out about tha all ptoducts and categories.Please move your mouse slowly so that our text to speech engine has time to respond.');">Mystique</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/account">Account</a></li>
-          <li><a href="#organisations">Orders</a></li>
-          <li><a href="#courses">Subscription Orders</a></li>
-          <li class="btn-trial"><a href="/cart" ng-model="current_user" ng-change="current_user">Shopping Cart : {{cart_length}}</a></li>
+          <li><a href="/account"ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Click here to edit your personal information...view previous orders and subscription orders ..');">Account</a></li>
+          <li><a href="/account" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Click here to view your current orders..');">Orders</a></li>
+          <li><a href="/account" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Click here to view your subscription orders..');">Subscription Orders</a></li>
+          <li class="btn-trial"><a href="/cart" ng-model="current_user" ng-change="current_user" ng-mouseleave="pauseit()"    ng-mouseover="describe_element('Click here to view the items in your shopping cart..');">Shopping Cart : {{cart_length}}</a></li>
           <li class="btn-trial"><a href="#">{{current_user.first_name}}</a></li>
         </ul>
         </div>

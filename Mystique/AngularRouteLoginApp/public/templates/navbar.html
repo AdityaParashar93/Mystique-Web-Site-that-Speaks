@@ -1,15 +1,15 @@
-<div class="row" >
+<div class="row" ng-init="init_header1();">
 <div class="col-md-12">
     <div class="row">
     <div class="navbar navbar-fixed">
     	<nav>
     	<div class="col-md-12">
-			<div class="col-md-2"><a href="#" ng-click="fetchproducts('BabyCare');"><h4>Baby Care</h4></a></div>
-			<div class="col-md-2"><a href="#" ng-click="fetchproducts('Clothing');"><h4>Clothing</h4></a></div>
-			<div class="col-md-2"><a href="#" ng-click="fetchproducts('Grocery');"><h4>Groceries</h4></a></div>
-			<div class="col-md-2"><a href="#" ng-click="fetchproducts('PersonalCare');"><h4>Personal Care</h4></a></div>
-			<div class="col-md-2"><a href="#" ng-click="fetchproducts('Electronics');"><h4>Electronics</h4></a></div>
-			<div class="col-md-2"><a href="#" ng-click="fetchproducts('VisualAssistant');"><h4>Visual Assistants</h4></a></div>
+			<div class="col-md-2"><a href="#" ng-click="fetchproducts('BabyCare');"><h4 ng-mouseover = "describe_element('You are on row which contains list of shopping categories and click here to browse Babycare products.To check other categories move cursor to right')" ng-mouseleave = "pauseit()">Baby Care</h4></a></div>
+			<div class="col-md-2"><a href="#" ng-click="fetchproducts('Clothing');"><h4 ng-mouseover = "describe_element('click here to browse Clothing category.To check other categories move cursor to right')" ng-mouseleave = "pauseit()">Clothing</h4></a></div>
+			<div class="col-md-2"><a href="#" ng-click="fetchproducts('Grocery');"><h4 ng-mouseover = "describe_element('click here to browse Grocery Items.To check other categories move cursor to right')" ng-mouseleave = "pauseit()">Groceries</h4></a></div>
+			<div class="col-md-2"><a href="#" ng-click="fetchproducts('PersonalCare');"><h4 ng-mouseover = "describe_element('click here to browse personalcare products.To check other categories move cursor to right')" ng-mouseleave = "pauseit()">Personal Care</h4></a></div>
+			<div class="col-md-2"><a href="#" ng-click="fetchproducts('Electronics');"><h4 ng-mouseover = "describe_element('click here to browse Electronics Items.To check other categories move cursor to right')" ng-mouseleave = "pauseit()">Electronics</h4></a></div>
+			<div class="col-md-2"><a href="#" ng-click="fetchproducts('VisualAssistant');"><h4 ng-mouseover = "describe_element('click here to browse Visual assistant products.This is the last category. to browse more categories move cursor to left')" ng-mouseleave = "pauseit()">Visual Assistants</h4></a></div>
 		</div>
 		</nav>
     </div>

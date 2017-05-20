@@ -1,4 +1,4 @@
-<h1 ng-init="init_header1();">Shopping Cart</h1>
+<h1 ng-init="init_header1();"  ng-mouseleave="pauseit()" ng-mouseover="describe_element('You are currently in the cart page. There are' + current_user.cart.length + 'items in your cart. You can slowly move your mouse down to hear deatils of items in your cart.');">Shopping Cart</h1>
 
 <div class="shopping-cart" ng-init="prepare_cart()">
 
@@ -12,7 +12,7 @@
   </div>
 	<div class="row" ng-model="cart" ng-change="cart" ng-init="prepare_cart_products(current_user.cart);">	
   <div class="product" ng-repeat="x in cart" >
-    <div class="product-image">
+    <div class="product-image" ng-mouseleave="pauseit()" ng-mouseover="describe_products1(x);">
       <img class="img-responsive" ng-src="https://{{x.URL}}" alt="" size="width:100px;height:80px;">
     </div>
     <div class="product-details">
@@ -21,14 +21,14 @@
     </div>
     <div class="product-price">{{x.productcost}}</div>
     <div class="product-quantity">
-      <input type="number" min="1" max="10" ng-model="x.product_quantity" ng-change="update_cart(x);">
+      <input type="number" min="1" max="10" ng-model="x.product_quantity" ng-change="update_cart(x);" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to edit the quantity of the product.')">
     </div>
-    <div class="product-removal">
-      <button class="remove-product" ng-click="remove_cart(x);">
+    <div class="product-removal" >
+      <button class="remove-product" ng-click="remove_cart(x);" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to remove the product from the cart')">
         Remove
       </button>
     </div>
-    <div class="product-line-price">{{x.product_total}}</div>
+    <div class="product-line-price" ng-mouseleave="pauseit()" ng-mouseover="describe_element('The total price for this amount will be '+ x.product_total)">{{x.product_total}}</div>
   </div>
   </div>
 
@@ -36,18 +36,18 @@
   <div class="totals">
     <div class="totals-item">
       <label>Subtotal</label>
-      <div class="totals-value" id="cart-subtotal" ng-model="order_total" ng-change="order_total">{{order_total}}</div>
+      <div class="totals-value" id="cart-subtotal" ng-model="order_total" ng-change="order_total" ng-mouseleave="pauseit()" ng-mouseover="describe_element('The total for this order will be '+ order_total+'.   Move your mouse downward to find out about the tax for this order.')">{{order_total}}</div>
     </div>
     <div class="totals-item">
       <label>Tax (5%)</label>
-      <div class="totals-value" id="cart-tax" ng-model="order_total_tax" ng-change="order_total_tax">{{(order_total_tax-order_total)}}</div>
+      <div class="totals-value" id="cart-tax" ng-model="order_total_tax" ng-change="order_total_tax" ng-change="order_total" ng-mouseleave="pauseit()" ng-mouseover="describe_element('The tax for this order will be '+ order_total+'Move your mouse downward find out about the grand total for this order.')">{{(order_total_tax-order_total)}}</div>
     </div>
     <div class="totals-item totals-item-total">
       <label>Grand Total</label>
-      <div class="totals-value" id="cart-total" ng-model="order_total_tax" ng-change="order_total_tax">{{order_total_tax}}</div>
+      <div class="totals-value" id="cart-total" ng-model="order_total_tax" ng-change="order_total_tax" ng-change="order_total" ng-mouseleave="pauseit()" ng-mouseover="describe_element('The Grand total for this order will be '+ order_total+'. Move your mouse downward to checkout.')">{{order_total_tax}}</div>
     </div>
   </div>
       
-      <a class="checkout" href="#" ng-click="checkout()">Checkout</a>
+      <a class="checkout" href="#" ng-click="checkout()" ng-mouseleave="pauseit()" ng-mouseover="describe_element('Click here to go to the check out page');">Checkout</a>
 
 </div>

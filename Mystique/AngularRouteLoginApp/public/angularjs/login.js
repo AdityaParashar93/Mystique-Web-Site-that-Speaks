@@ -104,6 +104,11 @@ login.controller('login', function($scope,$http,$state,$window, $cookies, $cooki
 		 window.speechSynthesis.speak(new SpeechSynthesisUtterance($scope.text));
 	};
 	
+	$scope.describe_products1=function(x){
+		$scope.text="The name of this product is"+x.productname+". The product is described as"+x.productdesc+". The product cost "+x.productcost+". Move your mouse to right to edit the quantity.";
+		 window.speechSynthesis.speak(new SpeechSynthesisUtterance($scope.text));
+	};
+	
 	 $scope.pauseit = function () {
 	      window.speechSynthesis.cancel();
 	 };
@@ -170,6 +175,7 @@ login.controller('login', function($scope,$http,$state,$window, $cookies, $cooki
 			if (data.statusCode == 200) {
 				$scope.valid_data = false;
 				$scope.invalid_data = true;
+				$scope.describe_element("Hey you have been registered with our site. Please click on login button to ");
 			}
 			else{
 				$scope.invalid_data = false;
@@ -229,6 +235,7 @@ login.controller('login', function($scope,$http,$state,$window, $cookies, $cooki
 				if(data.products[0])
 				{
 					$scope.products=data.products[0].products;
+					$scope.describe_element("The Products from category"+category+"has been loaded on your screen. Please move your mouse downwards to find out about them.");
 				}
 			}
 			else{
@@ -291,6 +298,7 @@ login.controller('login', function($scope,$http,$state,$window, $cookies, $cooki
 		x.product_total=(x.productcost*x.product_quantity);
 		$scope.order_total=$scope.order_total+x.product_total;
 		$scope.order_total_tax=Math.round($scope.order_total*1.05);
+		$scope.describe_element("Your cart has been updated.Please go to the specific products to find out about the updated details.");
 	}
 	
 
@@ -314,6 +322,7 @@ login.controller('login', function($scope,$http,$state,$window, $cookies, $cooki
 				$scope.cart=data.user.cart;
 				$scope.current_user.cart=data.user.cart;
 				$scope.prepare_cart_products($scope.current_user.cart);
+				$scope.describe_element("The item is removed from the cart.Please go to the specific products to find out about the updated details.");
 			}
 			else{
 				
@@ -363,17 +372,20 @@ login.controller('login', function($scope,$http,$state,$window, $cookies, $cooki
 					window.localStorage.setItem('user',data.user);
 					$scope.current_user=data.user;
 					$scope.valid_cc=false;
+					$scope.describe_element("Your order was placed successfully and the order will be delivered to you within 2 days. If you have selected the order as a subscription order it will be delivered evry week.");
 				}
 				else{
 					$scope.invalid_cc=false;
 					console.log(data);
+					$scope.describe_element("There was some error from our side while processing your order.Please try again later.");
 				}
 			}).error(function(error) {
-				
+				$scope.describe_element("There was error in our system.we could not process your order please try again later.");
 			});
 		}
 		else{
 			$scope.enter_cc=false;
+			$scope.describe_element("Please enter the payment details carefully");
 		}
 	};
 	

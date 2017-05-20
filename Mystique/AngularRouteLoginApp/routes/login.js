@@ -11,8 +11,6 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var passport = require('passport');
 var mq_client = require('../rpc/client');
-var redis = require('redis');
-var redisclient = redis.createClient(6379, '127.0.0.1');
 //require('./routes/passport')(passport);
 
 exports.checkLogin = function(req,res,next){
